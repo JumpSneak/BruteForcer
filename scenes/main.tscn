@@ -1,0 +1,149 @@
+[gd_scene load_steps=2 format=3 uid="uid://bx3nfeftsp6q4"]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1"]
+
+[node name="main" type="Node2D"]
+script = ExtResource("1")
+metadata/_edit_lock_ = true
+
+[node name="backplate" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1156.0
+offset_bottom = 651.0
+focus_mode = 1
+metadata/_edit_lock_ = true
+
+[node name="hline" type="ColorRect" parent="."]
+offset_left = 37.0
+offset_top = 467.0
+offset_right = 1116.0
+offset_bottom = 471.0
+color = Color(0.239216, 0.239216, 0.239216, 1)
+
+[node name="Button" type="Button" parent="."]
+offset_left = 897.0
+offset_top = 272.0
+offset_right = 1086.0
+offset_bottom = 368.0
+focus_mode = 0
+text = "START
+BRUTE-FORCE"
+
+[node name="LineEdit" type="LineEdit" parent="."]
+offset_left = 67.0
+offset_top = 108.0
+offset_right = 870.0
+offset_bottom = 139.0
+placeholder_text = "Enter hash (right-click to paste)"
+max_length = 64
+expand_to_text_length = true
+context_menu_enabled = false
+
+[node name="Label" type="LineEdit" parent="."]
+offset_left = 67.0
+offset_top = 162.0
+offset_right = 260.0
+offset_bottom = 193.0
+theme_override_colors/font_uneditable_color = Color(1, 1, 1, 1)
+placeholder_text = "Password result"
+editable = false
+expand_to_text_length = true
+
+[node name="brutetime" type="Label" parent="."]
+offset_left = 67.0
+offset_top = 207.0
+offset_right = 269.0
+offset_bottom = 230.0
+
+[node name="charsetselection" type="Node2D" parent="."]
+
+[node name="ascii" type="Button" parent="charsetselection"]
+offset_left = 897.0
+offset_top = 108.0
+offset_right = 1086.0
+offset_bottom = 139.0
+focus_mode = 0
+theme_override_colors/font_disabled_color = Color(0, 1, 0, 1)
+disabled = true
+text = "ASCII characters"
+
+[node name="letters" type="Button" parent="charsetselection"]
+offset_left = 897.0
+offset_top = 147.0
+offset_right = 1086.0
+offset_bottom = 178.0
+focus_mode = 0
+theme_override_colors/font_disabled_color = Color(0, 1, 0, 1)
+text = "only letters"
+
+[node name="numbers" type="Button" parent="charsetselection"]
+offset_left = 897.0
+offset_top = 188.0
+offset_right = 1086.0
+offset_bottom = 219.0
+focus_mode = 0
+theme_override_colors/font_disabled_color = Color(0, 1, 0, 1)
+text = "only numbers"
+
+[node name="hashin" type="LineEdit" parent="."]
+offset_left = 67.0
+offset_top = 497.0
+offset_right = 260.0
+offset_bottom = 528.0
+placeholder_text = "Enter password"
+secret = true
+expand_to_text_length = true
+clear_button_enabled = true
+
+[node name="CheckButton" type="CheckButton" parent="hashin"]
+layout_mode = 0
+offset_left = 202.0
+offset_right = 246.0
+offset_bottom = 31.0
+button_pressed = true
+
+[node name="hashout" type="LineEdit" parent="."]
+offset_left = 67.0
+offset_top = 548.0
+offset_right = 260.0
+offset_bottom = 579.0
+placeholder_text = "Click to copy hash"
+editable = false
+expand_to_text_length = true
+
+[node name="Button2" type="Button" parent="."]
+offset_left = 897.0
+offset_top = 375.0
+offset_right = 1086.0
+offset_bottom = 406.0
+focus_mode = 0
+text = "CANCEL"
+
+[node name="maxlengthsetting" type="SpinBox" parent="."]
+offset_left = 1003.0
+offset_top = 230.0
+offset_right = 1086.06
+offset_bottom = 261.0
+min_value = 1.0
+value = 6.0
+
+[node name="Label" type="Label" parent="maxlengthsetting"]
+layout_mode = 0
+offset_left = -106.0
+offset_top = 5.0
+offset_right = -14.0
+offset_bottom = 31.0
+text = "max. length"
+
+[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
+[connection signal="gui_input" from="LineEdit" to="." method="_on_line_edit_gui_input"]
+[connection signal="pressed" from="charsetselection/ascii" to="." method="_on_ascii_pressed"]
+[connection signal="pressed" from="charsetselection/letters" to="." method="_on_lettersonly_pressed"]
+[connection signal="pressed" from="charsetselection/numbers" to="." method="_on_numbersonly_pressed"]
+[connection signal="text_changed" from="hashin" to="." method="_on_hashin_text_changed"]
+[connection signal="text_submitted" from="hashin" to="." method="_on_hashin_text_submitted"]
+[connection signal="toggled" from="hashin/CheckButton" to="." method="_on_check_button_toggled"]
+[connection signal="focus_entered" from="hashout" to="." method="_on_hashout_focus_entered"]
+[connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
+[connection signal="value_changed" from="maxlengthsetting" to="." method="_on_spin_box_value_changed"]
